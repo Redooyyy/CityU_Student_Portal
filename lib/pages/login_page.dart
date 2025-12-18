@@ -304,7 +304,7 @@ class _LoginPageState extends State<LoginPage> {
                                           fontWeight: FontWeight.w500,
                                         ),
                                         hintText: "Shift",
-                                        labelStyle: TextStyle(
+                                        hintStyle: TextStyle(
                                           color: Colors.white38,
                                         ),
                                         enabledBorder: OutlineInputBorder(
