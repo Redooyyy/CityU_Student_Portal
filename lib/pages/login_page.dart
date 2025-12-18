@@ -1,4 +1,5 @@
-import 'package:choice/choice.dart';
+import 'package:chip_list/chip_list.dart';
+import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:cool_dropdown/models/cool_dropdown_item.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +12,17 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //NOTE:User inputs
+  String _usrDepartment = "";
+  String _usrBatch = "";
   //for choice box
-  final List<String> _dayOrEve = ['Day', 'Evening'];
   final departmentDropdownController = DropdownController<String>();
-  late List<CoolDropdownItem<String>> departmentItems;
-  final Color active = Color.fromRGBO(170, 129, 217, 0.4);
-  final Color defaultColor = Color.fromRGBO(255, 255, 255, 0.9);
-  final String pleaseSelect = 'Select department';
+  final batchController = DropdownController<String>();
 
+  late List<CoolDropdownItem<String>> departmentItems;
+  late List<CoolDropdownItem<String>> batchList;
+
+  final List<String> _dayEveningList = ["Day", "Evening"];
   final List<String> _department = [
     'CSE',
     'BSTE',
@@ -28,21 +32,31 @@ class _LoginPageState extends State<LoginPage> {
     'BBA',
     'Agriculture',
   ];
+
+  //TODO:generate batch according to department
+  final List<String> _batch = [
+    '59',
+    '60',
+    '61',
+    '62',
+    '63',
+    '64',
+    '65',
+    '66',
+    '67',
+    '68',
+  ];
   @override
   void initState() {
     super.initState();
     // TODO: implement initState
-
-    departmentItems = _department.map((dept) {
-      return CoolDropdownItem<String>(
-        label: dept, // text shown
-        value: dept, // actual value
-      );
-    }).toList();
+    loadDept();
+    loadBatch();
   }
 
-  String? _dOrE;
+  int _dayEveIndx = 0;
   bool _daySelect = false;
+  bool _eveSelected = false;
   bool _obsecureText = true;
   String? _userDepartment;
   final List<Icon> _deIcon = [Icon(Icons.brightness_2), Icon(Icons.sunny)];
@@ -56,148 +70,263 @@ class _LoginPageState extends State<LoginPage> {
 
   void setSelectedVal(String? value) {
     setState(() {
-      _dOrE = value;
+      // _dOrE = value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        //NOTE:Login card
-        child: Container(
-          margin: .all(25),
-          height: 500,
-          width: MediaQuery.widthOf(context),
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(255, 255, 255, 0.9),
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.2),
-                spreadRadius: 3,
-                blurRadius: 7,
-                offset: Offset(0, 3),
-              ),
-            ],
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            // image: NetworkImage(
+            //   'https://media.licdn.com/dms/image/v2/C511BAQHE9ado2KPp6A/company-background_10000/company-background_10000/0/1584245134523/city_university_bd_cover?e=2147483647&v=beta&t=aXKXdFMzpOQuYWb-t1YzBNWcQkl-saKLh64B_ZLfyOU',
+            // ),
+            image: AssetImage("assets/images/backgroundTest.png"),
+            fit: BoxFit.cover,
           ),
+        ),
+        child: Center(
+          //NOTE:Login card
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(25, 35, 25, 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                feildHint("Sudent ID"),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.account_circle_sharp),
-                      //TODO:focus color change
-                      focusColor: Colors.blue,
-                      border: OutlineInputBorder(
-                        //TODO:have to change border side
-                        borderSide: BorderSide(width: 0.2, color: Colors.blue),
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      hintText: "Enter your student ID",
+            padding: const EdgeInsets.fromLTRB(25.0, 8.0, 25.0, 8.0),
+            child: GlassContainer(
+              height: 500,
+              width: MediaQuery.widthOf(context),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(25, 0.0, 25, 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image(
+                            image: AssetImage("assets/images/university.png"),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-
-                const SizedBox(height: 12),
-
-                feildHint("Password"),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: TextField(
-                    obscureText: _obsecureText,
-                    decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          setState(() => _obsecureText = !_obsecureText);
-                        },
-                        icon: Icon(
-                          _obsecureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                    // const SizedBox(height: 15),
+                    SizedBox(
+                      height: 55,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          floatingLabelStyle: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                          labelText: "Student ID",
+                          labelStyle: TextStyle(color: Colors.white38),
+                          prefixIcon: Icon(
+                            Icons.account_circle_sharp,
+                            color: Colors.white,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1.5,
+                              color: Colors.black54,
+                            ),
+                            borderRadius: .circular(15),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              width: 1.5,
+                              color: Colors.white,
+                            ),
+                            borderRadius: .circular(15),
+                          ),
+                          // hintText: "Enter your student ID",
                         ),
                       ),
-                      prefixIcon: Icon(Icons.key),
-                      //TODO:focus color change
-                      focusColor: Colors.blue,
-                      border: OutlineInputBorder(
-                        //TODO:have to change border side
-                        borderSide: BorderSide(width: 0.2, color: Colors.blue),
-                        borderRadius: BorderRadius.circular(18),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: SizedBox(
+                        height: 55,
+                        child: TextField(
+                          obscureText: _obsecureText,
+                          decoration: InputDecoration(
+                            floatingLabelStyle: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() => _obsecureText = !_obsecureText);
+                              },
+                              icon: Icon(
+                                _obsecureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: Colors.white,
+                              ),
+                            ),
+                            prefixIcon: Icon(Icons.key, color: Colors.white),
+                            //TODO:focus color change
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1.5,
+                                color: Colors.black54,
+                              ),
+                              borderRadius: .circular(15),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                width: 1.5,
+                                color: Colors.white,
+                              ),
+                              borderRadius: .circular(15),
+                            ),
+                            labelText: "Password",
+                            labelStyle: TextStyle(color: Colors.white38),
+                            // hintText: "Enter your student ID",
+                          ),
+                        ),
                       ),
-                      hintText: "Password",
                     ),
-                  ),
-                ),
-                const SizedBox(height: 12),
+                    const SizedBox(height: 12),
 
-                feildHint("Department"),
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Container(
-                    width: MediaQuery.widthOf(context),
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(255, 255, 255, 0.9),
-                      borderRadius: .circular(18),
-                    ),
-                    child: CoolDropdown<String>(
-                      resultOptions: ResultOptions(
-                        placeholder: 'Select Department',
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: SizedBox(
+                        width: MediaQuery.widthOf(context),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: CoolDropdown<String>(
+                                dropdownOptions: DropdownOptions(
+                                  color: Colors.white70.withValues(alpha: 0.7),
+                                ),
+                                resultOptions: ResultOptions(
+                                  height: 55,
+                                  placeholder: 'Department',
+                                  placeholderTextStyle: TextStyle(
+                                    color: Colors.white38,
+                                  ),
+                                  textStyle: TextStyle(color: Colors.white),
+                                  boxDecoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: .circular(18),
+                                    border: BoxBorder.all(
+                                      width: 1.5,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  openBoxDecoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: .circular(18),
+                                    border: .all(
+                                      width: 1.5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                dropdownList: departmentItems,
+                                controller: departmentDropdownController,
+                                onChange: (a) {
+                                  departmentDropdownController.close();
+                                  print("selected");
+                                  _usrDepartment = a;
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              flex: 1,
+                              child: CoolDropdown<String>(
+                                dropdownOptions: DropdownOptions(
+                                  color: Colors.white70.withValues(alpha: 0.7),
+                                ),
+                                resultOptions: ResultOptions(
+                                  height: 55,
+                                  placeholder: 'Batch',
+                                  placeholderTextStyle: TextStyle(
+                                    color: Colors.white38,
+                                  ),
+                                  textStyle: TextStyle(color: Colors.white),
+                                  boxDecoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: .circular(18),
+                                    border: BoxBorder.all(
+                                      width: 1.5,
+                                      color: Colors.black54,
+                                    ),
+                                  ),
+                                  openBoxDecoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: .circular(18),
+                                    border: .all(
+                                      width: 1.5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                dropdownList: batchList,
+                                controller: batchController,
+                                onChange: (a) {
+                                  batchController.close();
+                                  print("selected");
+                                  _usrBatch = a;
+                                  setState(() {});
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      dropdownList: departmentItems,
-                      controller: departmentDropdownController,
-                      onChange: (a) {
-                        departmentDropdownController.close();
-                        print("selected");
-                      },
                     ),
-                  ),
-                ),
-                const SizedBox(height: 12),
+                    const SizedBox(height: 12),
 
-                //BUG:Color not swithing while selecting chips
-                //TODO:fixing the choice boxes must
-                //NOTE:choice box just initialized didn't fetched the selected value
-                //PERF:value is updating without any error
-                Row(
-                  children: [
-                    ChoiceChip(
-                      backgroundColor: _daySelect ? active : defaultColor,
-                      showCheckmark: false,
-                      label: Text("Day"),
-                      selected: _daySelect,
-                      onSelected: (newVal) {
-                        setState(() {
-                          _daySelect = !_daySelect;
-                          _dOrE = "Day";
-                        });
-                      },
+                    //BUG:Color not swithing while selecting chips
+                    //TODO:fixing the choice boxes must
+                    Row(
+                      children: [
+                        ChipList(
+                          extraOnToggle: (val) => setState(() {
+                            _dayEveIndx = val;
+                          }),
+                          showCheckmark: false,
+                          listOfChipNames: _dayEveningList,
+                          listOfChipIndicesCurrentlySelected: [_dayEveIndx],
+                          inactiveTextColorList: [Colors.black],
+                          inactiveBgColorList: [Colors.transparent],
+                          activeBgColorList: [Colors.blue.shade300],
+                        ),
+                      ],
                     ),
+                    Text(_dayEveningList[_dayEveIndx]),
+                    Text(_usrDepartment + " " + _usrBatch),
 
-                    SizedBox(width: 10),
-
-                    ChoiceChip(
-                      backgroundColor: _daySelect ? defaultColor : active,
-                      showCheckmark: false,
-                      label: Text("Evening"),
-                      selected: _daySelect,
-                      onSelected: (newVal) {
-                        setState(() {
-                          _daySelect = !_daySelect;
-                          _dOrE = "Evening";
-                        });
-                      },
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: GlassContainer(
+                          width: 130,
+                          height: 40,
+                          child: Text(
+                            "LOGIN",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                Text(_dOrE.toString()),
-                Text(_userDepartment.toString()),
-              ],
+              ),
             ),
           ),
         ),
@@ -205,7 +334,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Text feildHint(String s) {
-    return Text(s, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600));
+  void loadDept() {
+    departmentItems = _department.map((dept) {
+      return CoolDropdownItem<String>(
+        label: dept, // text shown
+        value: dept, // actual value
+      );
+    }).toList();
+  }
+
+  void loadBatch() {
+    batchList = _batch.map((allBatch) {
+      return CoolDropdownItem<String>(label: allBatch, value: allBatch);
+    }).toList();
   }
 }
