@@ -5,19 +5,27 @@ class Cancel {
   final Function onTab;
   final double height;
   final double width;
+  final bool animation;
 
-  const Cancel({required this.onTab, this.height = 45, this.width = 100});
+  const Cancel({
+    required this.onTab,
+    this.height = 45,
+    this.width = 100,
+    this.animation = true,
+  });
 
   Widget cancelButton() {
     return Center(
       child: GlassButton(
+        loadingCircleSize: 20,
+        buttonColor: Colors.transparent,
         blurX: 3,
         blurY: 3,
         isBorderButton: true,
         loadingColor: Colors.red,
         TextWidget: cancel(),
         onTab: () async {
-          await Future.delayed(Duration(seconds: 5));
+          animation ? await Future.delayed(Duration(seconds: 5)) : null;
           onTab();
         },
         width: width,

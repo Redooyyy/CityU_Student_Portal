@@ -14,6 +14,7 @@ class GlassButton extends StatefulWidget {
   final bool isBorderButton;
   final Color loadingColor;
   final Color buttonColor;
+  final double loadingCircleSize;
   const GlassButton({
     super.key,
     required this.width,
@@ -23,6 +24,7 @@ class GlassButton extends StatefulWidget {
     required this.buttonColor,
     this.blurX = 10.0,
     this.blurY = 10.0,
+    this.loadingCircleSize = 35,
     this.icon,
     this.loadingColor = Colors.white,
     this.isBorderButton = false,
@@ -76,7 +78,7 @@ class _GlassButtonState extends State<GlassButton> {
             child: isLoading
                 ? LoadingAnimationWidget.threeArchedCircle(
                     color: widget.loadingColor,
-                    size: 35,
+                    size: widget.loadingCircleSize,
                   )
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
