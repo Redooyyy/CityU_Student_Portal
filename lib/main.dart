@@ -1,3 +1,4 @@
+import 'package:cityu_student_protal/pages/home_page.dart';
 import 'package:cityu_student_protal/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         //colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
