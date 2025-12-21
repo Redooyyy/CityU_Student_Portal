@@ -8,17 +8,19 @@ class GlassButton extends StatefulWidget {
   final double width;
   final double blurX;
   final double blurY;
-  final Widget TextWidget;
+  final Text TextWidget;
   final IconData? icon;
   final Function onTab;
   final bool isBorderButton;
   final Color loadingColor;
+  final Color buttonColor;
   const GlassButton({
     super.key,
     required this.width,
     required this.height,
     required this.onTab,
     required this.TextWidget,
+    required this.buttonColor,
     this.blurX = 10.0,
     this.blurY = 10.0,
     this.icon,
@@ -69,9 +71,7 @@ class _GlassButtonState extends State<GlassButton> {
               border: widget.isBorderButton
                   ? Border.all(color: Colors.white.withValues(alpha: 0.3))
                   : null,
-              color: widget.isBorderButton
-                  ? Colors.white.withValues(alpha: 0.2)
-                  : Colors.pink,
+              color: widget.isBorderButton ? widget.buttonColor : Colors.pink,
             ),
             child: isLoading
                 ? LoadingAnimationWidget.threeArchedCircle(

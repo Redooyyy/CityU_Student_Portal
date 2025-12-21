@@ -26,7 +26,7 @@ class Cancel {
     );
   }
 
-  Widget cancel() {
+  Text cancel() {
     return Text(
       "Cancel",
       style: TextStyle(
