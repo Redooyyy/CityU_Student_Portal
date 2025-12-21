@@ -433,7 +433,7 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: GlassButton(
                       isBorderButton: true,
-
+                      buttonColor: Colors.white.withValues(alpha: 0.3),
                       width: 150,
                       height: 50,
                       onTab: () async {
