@@ -439,7 +439,10 @@ class _LoginPageState extends State<LoginPage> {
                       onTab: () async {
                         await Future.delayed(Duration(milliseconds: 2500));
                       },
-                      title: "LOGIN",
+                      TextWidget: Text(
+                        "LOGIN",
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ],

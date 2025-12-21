@@ -1,4 +1,5 @@
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
+import 'package:cityu_student_protal/custom_widget/glassy_button_loading.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,30 +18,6 @@ class HomePage extends StatelessWidget {
                   'https://wallpaperaccess.com/full/1638902.jpg',
                 ),
                 fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Center(
-            child: GlassContainer2(
-              width: 90,
-              height: 45,
-              child: Text(
-                "Cancel",
-                style: TextStyle(
-                  color: Colors.red.withValues(alpha: .9),
-                  shadows: [
-                    Shadow(
-                      color: Colors.red,
-                      offset: Offset(0, 25),
-                      blurRadius: 45,
-                    ),
-                    Shadow(
-                      color: Colors.red,
-                      offset: Offset(0, -25),
-                      blurRadius: 45,
-                    ),
-                  ],
-                ),
               ),
             ),
           ),

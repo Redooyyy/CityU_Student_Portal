@@ -6,17 +6,23 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 class GlassButton extends StatefulWidget {
   final double height;
   final double width;
-  final String title;
+  final double blurX;
+  final double blurY;
+  final Widget TextWidget;
   final IconData? icon;
   final Function onTab;
   final bool isBorderButton;
+  final Color loadingColor;
   const GlassButton({
     super.key,
     required this.width,
     required this.height,
     required this.onTab,
-    required this.title,
+    required this.TextWidget,
+    this.blurX = 10.0,
+    this.blurY = 10.0,
     this.icon,
+    this.loadingColor = Colors.white,
     this.isBorderButton = false,
   });
 
@@ -32,7 +38,7 @@ class _GlassButtonState extends State<GlassButton> {
     return ClipRRect(
       borderRadius: .circular(20),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        filter: ImageFilter.blur(sigmaX: widget.blurX, sigmaY: widget.blurY),
         child: InkWell(
           onTap: () async {
             setState(() {
@@ -69,7 +75,7 @@ class _GlassButtonState extends State<GlassButton> {
             ),
             child: isLoading
                 ? LoadingAnimationWidget.threeArchedCircle(
-                    color: widget.isBorderButton ? Colors.white : Colors.white,
+                    color: widget.loadingColor,
                     size: 35,
                   )
                 : Row(
@@ -83,16 +89,7 @@ class _GlassButtonState extends State<GlassButton> {
                               : Colors.white,
                         ),
                       if (widget.icon != null) SizedBox(width: 8),
-                      if (showText)
-                        Text(
-                          widget.title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: widget.isBorderButton
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
+                      if (showText) widget.TextWidget,
                     ],
                   ),
           ),
