@@ -22,7 +22,12 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Cancel(onTab: () {}).cancelButton(),
+          Cancel(
+            onTab: () {
+              print("Cancel");
+            },
+            animation: false,
+          ).cancelButton(),
         ],
       ),
     );
