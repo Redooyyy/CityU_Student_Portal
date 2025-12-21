@@ -1,4 +1,5 @@
 import 'package:chip_list/chip_list.dart';
+import 'package:cityu_student_protal/custom_widget/dropdown.dart';
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_button_loading.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
@@ -19,15 +20,17 @@ class _LoginPageState extends State<LoginPage> {
   //NOTE:User inputs
   String _usrDepartment = "";
   String _usrBatch = "";
-  //for choice box
+
+  //Dropdown controllers
   final departmentDropdownController = DropdownController<String>();
   final batchController = DropdownController<String>();
+
+  //Textfield controllers
   final TextEditingController _shiftController = TextEditingController();
   final TextEditingController _studentIdController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  late List<CoolDropdownItem<String>> departmentItems;
-  late List<CoolDropdownItem<String>> batchList;
 
+  //texting values
   final List<String> _dayEveningList = ["Day", "Evening"];
   final List<String> _department = [
     'CSE',
@@ -55,28 +58,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    // _shiftController.text = _dayEveningList[0];
-    loadDept();
-    loadBatch();
   }
 
   int _dayEveIndx = -1;
   bool _obsecureText = true;
-  String? _userDepartment;
-  final List<Icon> _deIcon = [Icon(Icons.brightness_2), Icon(Icons.sunny)];
-  void _selectedDepartment(String? department) {
-    if (department is String) {
-      setState(() {
-        _userDepartment = department;
-      });
-    }
-  }
-
-  void setSelectedVal(String? value) {
-    setState(() {
-      // _dOrE = value;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -180,101 +165,34 @@ class _LoginPageState extends State<LoginPage> {
                                   children: [
                                     Expanded(
                                       flex: 2,
-                                      child: CoolDropdown<String>(
-                                        onOpen: (isOpen) {
-                                          FocusScope.of(context).unfocus();
+                                      child: MyDropdown(
+                                        items: _department,
+                                        placeholder: "Department",
+                                        onTab: () {},
+                                        onChnage: (a) {
+                                          print(a);
+                                          departmentDropdownController.close();
                                         },
-                                        dropdownOptions: DropdownOptions(
-                                          color: Colors.white70.withValues(
-                                            alpha: 0.9,
-                                          ),
-                                        ),
-                                        resultOptions: ResultOptions(
-                                          height: 55,
-                                          placeholder: 'Department',
-                                          placeholderTextStyle: TextStyle(
-                                            color: Colors.white38,
-                                          ),
-                                          textStyle: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                          boxDecoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius: .circular(18),
-                                            border: BoxBorder.all(
-                                              width: 1.5,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          openBoxDecoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius: .circular(18),
-                                            border: .all(
-                                              width: 1.5,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        dropdownList: departmentItems,
                                         controller:
                                             departmentDropdownController,
-                                        onChange: (a) {
-                                          departmentDropdownController.close();
-                                          print("selected");
-                                          _usrDepartment = a;
-                                          setState(() {});
-                                        },
-                                      ),
+                                      ).myDropdown(context),
                                     ),
+
                                     const SizedBox(width: 10),
 
                                     //NOTE:Btach Dropdown
                                     Expanded(
                                       flex: 1,
-                                      child: CoolDropdown<String>(
-                                        onOpen: (isOpen) {
-                                          FocusScope.of(context).unfocus();
-                                        },
-                                        dropdownOptions: DropdownOptions(
-                                          color: Colors.white70.withValues(
-                                            alpha: 0.9,
-                                          ),
-                                        ),
-                                        resultOptions: ResultOptions(
-                                          height: 55,
-                                          placeholder: 'Batch',
-                                          placeholderTextStyle: TextStyle(
-                                            color: Colors.white38,
-                                          ),
-                                          textStyle: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                          boxDecoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius: .circular(18),
-                                            border: BoxBorder.all(
-                                              width: 1.5,
-                                              color: Colors.black54,
-                                            ),
-                                          ),
-                                          openBoxDecoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            borderRadius: .circular(18),
-                                            border: .all(
-                                              width: 1.5,
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ),
-                                        dropdownList: batchList,
+                                      child: MyDropdown(
                                         controller: batchController,
-                                        onChange: (a) {
+                                        placeholder: "Batch",
+                                        onChnage: (a) {
                                           batchController.close();
-                                          print("selected");
-                                          _usrBatch = a;
-                                          setState(() {});
+                                          print(a);
                                         },
-                                      ),
+                                        onTab: () {},
+                                        items: _batch,
+                                      ).myDropdown(context),
                                     ),
                                   ],
                                 ),
@@ -283,6 +201,7 @@ class _LoginPageState extends State<LoginPage> {
 
                             const SizedBox(height: 12),
 
+                            //TODO:Must create my own choice chip for better UI
                             Row(
                               children: [
                                 Expanded(
@@ -452,20 +371,5 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
-  }
-
-  void loadDept() {
-    departmentItems = _department.map((dept) {
-      return CoolDropdownItem<String>(
-        label: dept, // text shown
-        value: dept, // actual value
-      );
-    }).toList();
-  }
-
-  void loadBatch() {
-    batchList = _batch.map((allBatch) {
-      return CoolDropdownItem<String>(label: allBatch, value: allBatch);
-    }).toList();
   }
 }
