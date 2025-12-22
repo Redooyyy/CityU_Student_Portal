@@ -14,6 +14,7 @@ class GlassButton extends StatefulWidget {
   final bool isBorderButton;
   final Color loadingColor;
   final Color buttonColor;
+  final List<BoxShadow>? boxShadow;
   final double loadingCircleSize;
   const GlassButton({
     super.key,
@@ -26,6 +27,7 @@ class GlassButton extends StatefulWidget {
     this.blurY = 10.0,
     this.loadingCircleSize = 35,
     this.icon,
+    this.boxShadow,
     this.loadingColor = Colors.white,
     this.isBorderButton = false,
   });
@@ -61,7 +63,8 @@ class _GlassButtonState extends State<GlassButton> {
             duration: Duration(milliseconds: 200),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              // boxShadow: [
+              boxShadow: widget.boxShadow ?? widget.boxShadow,
+              // [
               //   BoxShadow(
               //     color: widget.isBorderButton
               //         ? Colors.white.withValues(alpha: 0.2)
