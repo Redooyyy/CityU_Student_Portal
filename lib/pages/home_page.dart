@@ -36,6 +36,8 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  //NOTE:Testing values
+                  //TODO:Fetch from API
                   myCard("Sat", "23", "October"),
                   myCard("Sun", "24", "October"),
                   myCard("Mon", "25", "October"),
