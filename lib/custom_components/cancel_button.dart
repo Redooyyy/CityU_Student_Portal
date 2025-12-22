@@ -23,6 +23,20 @@ class Cancel {
         blurY: 3,
         isBorderButton: true,
         loadingColor: Colors.red,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.red,
+            blurRadius: 18,
+            offset: Offset(40, 48),
+            blurStyle: BlurStyle.outer,
+          ),
+          BoxShadow(
+            color: Colors.red,
+            blurRadius: 18,
+            offset: Offset(-40, -48),
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
         TextWidget: cancel(),
         onTab: () async {
           animation ? await Future.delayed(Duration(seconds: 5)) : null;
@@ -40,10 +54,10 @@ class Cancel {
       style: TextStyle(
         fontWeight: FontWeight.w600,
         color: Colors.red.withValues(alpha: .9),
-        shadows: [
-          Shadow(color: Colors.red, offset: Offset(0, 24), blurRadius: 40),
-          Shadow(color: Colors.red, offset: Offset(0, -24), blurRadius: 40),
-        ],
+        // shadows: [
+        //   Shadow(color: Colors.red, offset: Offset(0, 24), blurRadius: 40),
+        //   Shadow(color: Colors.red, offset: Offset(0, -24), blurRadius: 40),
+        // ],
       ),
     );
   }
