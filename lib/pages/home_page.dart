@@ -58,6 +58,7 @@ class HomePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GlassContainer2(
+        sigmaY: 0,
         sigmaX: 0,
         width: 90,
         height: 110,
