@@ -33,7 +33,7 @@ class GlassContainer2 extends StatelessWidget {
         child: Stack(
           children: [
             BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+              filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
               child: Container(),
             ),
             Container(
