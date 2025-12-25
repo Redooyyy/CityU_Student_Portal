@@ -7,6 +7,11 @@ import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   bool selected = false;
+  final List<String> date = ["23", "24", "25", "26", "27", "28", "29", "30"];
+  final List<String> week = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  final String month = "October";
+
+  int selectedIndex = -1;
   HomePage({super.key});
 
   @override
@@ -38,27 +43,27 @@ class _HomePageState extends State<HomePage> {
 
           //customCard
           Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //NOTE:Testing values
-                  //TODO:Fetch from API
-                  DateWeakChip(
-                    day: "Sat",
-                    month: "October",
-                    date: "22",
-                    sigmaY: 0,
+            child: SizedBox(
+              height: 126,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: widget.week.length,
+                itemBuilder: (context, index) {
+                  return DateWeakChip(
+                    selected: widget.selectedIndex == index,
                     sigmaX: 0,
-                    selected: widget.selected,
+                    sigmaY: 0,
+                    day: widget.week[index],
+                    date: widget.date[index],
+                    month: widget.month,
                     onTab: () {
-                      print("Tabbed");
-                      widget.selected = !widget.selected;
-                      setState(() {});
+                      setState(() {
+                        widget.selectedIndex = index;
+                        print(widget.date[index]);
+                      });
                     },
-                  ).myCard(),
-                ],
+                  ).myCard();
+                },
               ),
             ),
           ),
