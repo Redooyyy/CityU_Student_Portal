@@ -10,8 +10,9 @@ class HomePage extends StatefulWidget {
   final List<String> date = ["23", "24", "25", "26", "27", "28", "29", "30"];
   final List<String> week = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
   final String month = "October";
-
+  String? s;
   int selectedIndex = -1;
+
   HomePage({super.key});
 
   @override
@@ -42,30 +43,52 @@ class _HomePageState extends State<HomePage> {
           // ).cancelButton(),
 
           //customCard
-          Center(
-            child: SizedBox(
-              height: 126,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: widget.week.length,
-                itemBuilder: (context, index) {
-                  return DateWeakChip(
-                    selected: widget.selectedIndex == index,
-                    sigmaX: 0,
-                    sigmaY: 0,
-                    day: widget.week[index],
-                    date: widget.date[index],
-                    month: widget.month,
-                    onTab: () {
-                      setState(() {
-                        widget.selectedIndex = index;
-                        print(widget.date[index]);
-                      });
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //NOTE:For debugging purpose
+              if (widget.s != null)
+                Text(
+                  widget.s!,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              const SizedBox(height: 15),
+              Center(
+                child: SizedBox(
+                  height: 126,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.week.length,
+                    itemBuilder: (context, index) {
+                      return DateWeakChip(
+                        selected: widget.selectedIndex == index,
+                        sigmaX: 0,
+                        sigmaY: 0,
+                        day: widget.week[index],
+                        date: widget.date[index],
+                        month: widget.month,
+                        onTab: () {
+                          setState(() {
+                            widget.selectedIndex = index;
+                            print(widget.date[index]);
+                            widget.s =
+                                widget.date[index] +
+                                " " +
+                                widget.week[index] +
+                                " " +
+                                widget.month;
+                          });
+                        },
+                      ).myCard();
                     },
-                  ).myCard();
-                },
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),
