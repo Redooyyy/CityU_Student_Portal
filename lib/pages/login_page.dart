@@ -3,6 +3,7 @@ import 'package:cityu_student_protal/custom_widget/dropdown.dart';
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_button_loading.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
+import 'package:cityu_student_protal/pages/home_page.dart';
 import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:cool_dropdown/models/cool_dropdown_item.dart';
 import 'package:flutter/material.dart';
@@ -357,6 +358,10 @@ class _LoginPageState extends State<LoginPage> {
                       height: 50,
                       onTab: () async {
                         await Future.delayed(Duration(milliseconds: 2500));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
                       },
                       TextWidget: Text(
                         "LOGIN",
