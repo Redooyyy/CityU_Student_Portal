@@ -1,12 +1,25 @@
 import 'package:cityu_student_protal/custom_components/cancel_button.dart';
+import 'package:cityu_student_protal/custom_components/date_weak_chip.dart';
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  bool selected = false;
+  final List<String> date = ["23", "24", "25", "26", "27", "28", "29", "30"];
+  final List<String> week = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  final String month = "October";
+  String? s;
+  int selectedIndex = -1;
 
+  HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,86 +43,54 @@ class HomePage extends StatelessWidget {
           // ).cancelButton(),
 
           //customCard
-          Center(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //NOTE:Testing values
-                  //TODO:Fetch from API
-                  myCard("Sat", "23", "October"),
-                  myCard("Sun", "24", "October"),
-                  myCard("Mon", "25", "October"),
-                  myCard("Tue", "26", "October"),
-                  myCard("Wed", "27", "October"),
-                  myCard("Thu", "28", "October"),
-                  myCard("Fri", "29", "October"),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget myCard(String day, String date, String month) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GlassContainer2(
-        sigmaY: 0,
-        sigmaX: 0,
-        width: 90,
-        height: 110,
-        borderRadius: 20,
-        boxShadow: [
-          BoxShadow(color: Colors.white, blurRadius: 15, offset: Offset(95, 0)),
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 15,
-            offset: Offset(15, 115),
-          ),
-          BoxShadow(
-            color: Colors.white,
-            blurRadius: 15,
-            offset: Offset(90, 90),
-          ),
-        ],
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                day,
-                style: TextStyle(
-                  color: Colors.white54,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //NOTE:For debugging purpose
+              if (widget.s != null)
+                Text(
+                  widget.s!,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              const SizedBox(height: 15),
+              Center(
+                child: SizedBox(
+                  height: 126,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.week.length,
+                    itemBuilder: (context, index) {
+                      return DateWeakChip(
+                        selected: widget.selectedIndex == index,
+                        sigmaX: 0,
+                        sigmaY: 0,
+                        day: widget.week[index],
+                        date: widget.date[index],
+                        month: widget.month,
+                        onTab: () {
+                          setState(() {
+                            widget.selectedIndex = index;
+                            print(widget.date[index]);
+                            widget.s =
+                                widget.date[index] +
+                                " " +
+                                widget.week[index] +
+                                " " +
+                                widget.month;
+                          });
+                        },
+                      ).myCard();
+                    },
+                  ),
                 ),
               ),
-            ),
-            Text(
-              date,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 25,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(
-                month,
-                style: TextStyle(
-                  color: Colors.white54,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
