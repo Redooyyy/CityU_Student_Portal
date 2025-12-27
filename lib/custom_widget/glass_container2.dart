@@ -9,22 +9,26 @@ class GlassContainer2 extends StatelessWidget {
   final double sigmaX;
   final double sigmaY;
   final double borderRadius;
+  final BorderRadius? borderRadiuss;
   final List<BoxShadow>? boxShadow;
+  final bool center;
   const GlassContainer2({
     super.key,
     required this.width,
     required this.height,
     required this.child,
     this.borderRadius = 30,
+    this.borderRadiuss,
     this.boxShadow,
     this.sigmaX = 4.0,
     this.sigmaY = 4.0,
+    this.center = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: .circular(borderRadius),
+      borderRadius: borderRadiuss ?? .circular(borderRadius),
       child: Container(
         width: width,
         height: height,
@@ -38,7 +42,7 @@ class GlassContainer2 extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                borderRadius: .circular(borderRadius),
+                borderRadius: borderRadiuss ?? .circular(borderRadius),
                 border: .all(color: Colors.white.withValues(alpha: 0.2)),
                 boxShadow: boxShadow ?? boxShadow,
                 gradient: LinearGradient(
@@ -51,7 +55,7 @@ class GlassContainer2 extends StatelessWidget {
                 ),
               ),
             ),
-            Center(child: child),
+            center ? Center(child: child) : child,
           ],
         ),
       ),
