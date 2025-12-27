@@ -26,13 +26,13 @@ class MyDropdown {
         FocusScope.of(context).unfocus();
       },
       dropdownOptions: DropdownOptions(
-        color: Colors.white70.withValues(alpha: 0.9),
+        color: Colors.white70.withValues(alpha: 0.8),
       ),
       resultOptions: ResultOptions(
         height: 55,
         placeholder: placeholder,
         placeholderTextStyle: TextStyle(color: Colors.white38),
-        textStyle: TextStyle(color: Colors.white),
+        textStyle: TextStyle(color: Colors.white, fontSize: 15),
         boxDecoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: .circular(18),

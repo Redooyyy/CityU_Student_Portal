@@ -36,17 +36,17 @@ class DateWeakChip {
                   BoxShadow(
                     color: Colors.blue,
                     blurRadius: 80,
-                    spreadRadius: -14,
+                    spreadRadius: -25,
                     offset: Offset(0, 3),
                   ),
                   BoxShadow(
                     color: Colors.blue,
-                    blurRadius: 15,
+                    blurRadius: 10,
                     offset: Offset(80, 0),
                   ),
                   BoxShadow(
                     color: Colors.blue,
-                    blurRadius: 15,
+                    blurRadius: 10,
                     offset: Offset(-80, 0),
                   ),
                 ]
