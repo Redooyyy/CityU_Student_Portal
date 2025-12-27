@@ -1,5 +1,6 @@
 import 'package:cityu_student_protal/custom_components/cancel_button.dart';
 import 'package:cityu_student_protal/custom_components/date_weak_chip.dart';
+import 'package:cityu_student_protal/custom_components/routine_card.dart';
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
+              RoutineCard().card(),
             ],
           ),
         ],
