@@ -2,6 +2,26 @@ import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:flutter/material.dart';
 
 class RoutineCard {
+  final String startTime;
+  final String endTime;
+  final String courseTitle;
+  final String courseCode;
+  final String section;
+  final String teacherName;
+  final String roomNumber;
+  final VoidCallback onTab;
+
+  RoutineCard({
+    required this.startTime,
+    required this.endTime,
+    required this.courseTitle,
+    required this.courseCode,
+    required this.section,
+    required this.teacherName,
+    required this.roomNumber,
+    required this.onTab,
+  });
+
   Widget card() {
     double cardHeight = 180;
     return Row(
@@ -9,14 +29,14 @@ class RoutineCard {
         Expanded(
           flex: 1,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(15, 10, 5, 0),
+            padding: const EdgeInsets.fromLTRB(8, 10, 5, 8),
             child: GlassContainer2(
               center: false,
               width: double.infinity,
               height: cardHeight,
               borderRadiuss: .horizontal(left: Radius.circular(25)),
               //NOTE:For time
-              child: scedule("9:30", "11:50"),
+              child: scedule(startTime, endTime),
             ),
           ),
         ),
@@ -24,7 +44,7 @@ class RoutineCard {
         Expanded(
           flex: 3,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(5, 10, 15, 0),
+            padding: const EdgeInsets.fromLTRB(5, 10, 15, 8),
             child: GlassContainer2(
               center: false,
               width: double.infinity,
@@ -37,14 +57,12 @@ class RoutineCard {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    course("Object Oriented Programming"),
+                    course(courseTitle),
                     const SizedBox(height: 18),
-                    details("Course", "CSE-2111"),
-                    details("Section", "65_B"),
-                    teacher("AHM", () {
-                      print("tabbed");
-                    }),
-                    details("Room", "226"),
+                    details("Course", courseCode),
+                    details("Section", section),
+                    teacher(teacherName, onTab),
+                    details("Room", roomNumber),
                   ],
                 ),
               ),
@@ -65,14 +83,25 @@ Widget scedule(String start, String end) {
           padding: const EdgeInsets.only(top: 8.0),
           child: Text(
             start,
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),
       Center(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: Text(end, style: TextStyle(color: Colors.white, fontSize: 14)),
+          child: Text(
+            end,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ),
       ),
     ],
