@@ -46,6 +46,8 @@ class RoutineCard {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(5, 10, 15, 8),
             child: GlassContainer2(
+              sigmaX: 0,
+              sigmaY: 0,
               center: false,
               width: double.infinity,
               height: cardHeight,
