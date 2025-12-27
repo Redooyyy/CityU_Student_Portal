@@ -89,7 +89,31 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              RoutineCard().card(),
+              RoutineCard(
+                startTime: "11:50",
+                endTime: "01:10",
+                courseTitle: "Object Oriented Programming",
+                courseCode: "CSE-2111",
+                section: "65_B",
+                teacherName: "AHM",
+                roomNumber: "226",
+                onTab: () {
+                  print("Hehe");
+                },
+              ).card(),
+
+              RoutineCard(
+                startTime: "11:50",
+                endTime: "01:10",
+                courseTitle: "Object Oriented Programming",
+                courseCode: "CSE-2111",
+                section: "65_B",
+                teacherName: "AHM",
+                roomNumber: "226",
+                onTab: () {
+                  print("Hehe");
+                },
+              ).card(),
             ],
           ),
         ],
