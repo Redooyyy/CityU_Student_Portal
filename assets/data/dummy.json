@@ -1,0 +1,162 @@
+{
+  "class_routine": {
+    "Sat": [
+      {
+        "courseTitle": "Bangladesh Studies",
+        "courseCode": "HIST 2105",
+        "teacher": "N/A",
+        "section": "65_B",
+        "room": "314",
+        "start_time": "9:30",
+        "end_time": "10:20"
+      },
+      {
+        "courseTitle": "Engineering Professional Ethics",
+        "courseCode": "EPE 2101",
+        "teacher": "MTS",
+        "section": "65_B",
+        "room": "423",
+        "start_time": "11:50",
+        "end_time": "01:10"
+      },
+      {
+        "courseTitle": "Engineering Drawing Laboratory",
+        "courseCode": "CE 2104",
+        "teacher": "N/A",
+        "section": "65_B",
+        "room": "418",
+        "start_time": "01:30",
+        "end_time": "04:20"
+      }
+    ],
+    "Sun": [
+      {
+        "courseTitle": "Digital Logic Design",
+        "courseCode": "CSE 2111",
+        "teacher": "SM",
+        "section": "65_B",
+        "room": "132",
+        "start_time": "9:30",
+        "end_time": "10:20"
+      },
+      {
+        "courseTitle": "Digital Logic Design Laboratory",
+        "courseCode": "CSE 2112",
+        "teacher": "SM",
+        "section": "65_B",
+        "room": "423",
+        "start_time": "11:50",
+        "end_time": "01:10"
+      },
+      {
+        "courseTitle": "Linear Algebra, Laplace Transformation and Fourier Analysis",
+        "courseCode": "MATH 2105",
+        "teacher": "APR",
+        "section": "65_B",
+        "room": "314",
+        "start_time": "01:30",
+        "end_time": "02:50"
+      },
+      {
+        "courseTitle": "Object Oriented Programming",
+        "courseCode": "CSE 2115",
+        "teacher": "MAI",
+        "section": "65_B",
+        "room": "226",
+        "start_time": "03:00",
+        "end_time": "04:20"
+      }
+    ],
+    "Mon": [
+      {
+        "courseTitle": "Bangladesh Studies",
+        "courseCode": "HIST 2105",
+        "teacher": "N/A",
+        "section": "65_B",
+        "room": "314",
+        "start_time": "9:30",
+        "end_time": "10:20"
+      },
+      {
+        "courseTitle": "Object Oriented Programming",
+        "courseCode": "CSE 2115",
+        "teacher": "N/A",
+        "section": "65_B",
+        "room": "226",
+        "start_time": "10:25",
+        "end_time": "11:45"
+      },
+      {
+        "courseTitle": "Engineering Professional Ethics",
+        "courseCode": "EPE 2101",
+        "teacher": "MTS",
+        "section": "65_B",
+        "room": "223",
+        "start_time": "11:50",
+        "end_time": "01:10"
+      },
+      {
+        "courseTitle": "Discrete Mathematics",
+        "courseCode": "CSE 2117",
+        "teacher": "MAM",
+        "section": "65_B",
+        "room": "230",
+        "start_time": "10:25",
+        "end_time": "11:45"
+      }
+    ],
+    "Tue": [
+      {
+        "courseTitle": "Digital Logic Design",
+        "courseCode": "CSE 2111",
+        "teacher": "SM",
+        "section": "65_B",
+        "room": "132",
+        "start_time": "9:30",
+        "end_time": "10:20"
+      },
+      {
+        "courseTitle": "Object Oriented Programming Laboratory",
+        "courseCode": "CSE 2116",
+        "teacher": "IJM",
+        "section": "65_B",
+        "room": "221",
+        "start_time": "10:25",
+        "end_time": "01:10"
+      },
+      {
+        "courseTitle": "Linear Algebra, Laplace Transformation and Fourier Analysis",
+        "courseCode": "MATH 2105",
+        "teacher": "APR",
+        "section": "65_B",
+        "room": "223",
+        "start_time": "01:30",
+        "end_time": "02:50"
+      },
+      {
+        "courseTitle": "Object Oriented Programming",
+        "courseCode": "CSE 2115",
+        "teacher": "MAI",
+        "section": "65_B",
+        "room": "226",
+        "start_time": "03:00",
+        "end_time": "04:20"
+      }
+    ],
+    "Wed": [
+      {
+        "Class": "None"
+      }
+    ],
+    "Thu": [
+      {
+        "Class": "None"
+      }
+    ],
+    "Fri": [
+      {
+        "Class": "None"
+      }
+    ]
+  }
+}

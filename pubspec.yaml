@@ -65,6 +65,7 @@ flutter:
     - assets/images/backgroundTest.jpeg
     - assets/images/university.png
     - assets/images/homeBackground.jpg
+    - assets/data/dummy.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

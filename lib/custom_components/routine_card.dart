@@ -23,7 +23,7 @@ class RoutineCard {
   });
 
   Widget card() {
-    double cardHeight = 180;
+    double cardHeight = 191;
     return Row(
       children: [
         Expanded(

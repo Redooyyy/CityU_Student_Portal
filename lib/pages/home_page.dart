@@ -3,17 +3,17 @@ import 'package:cityu_student_protal/custom_components/date_weak_chip.dart';
 import 'package:cityu_student_protal/custom_components/routine_card.dart';
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
+import 'package:cityu_student_protal/database/testing_data.dart';
+import 'package:cityu_student_protal/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   bool selected = false;
-  final List<String> date = ["23", "24", "25", "26", "27", "28", "29", "30"];
-  final List<String> week = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
-  final String month = "October";
-  String? s;
-  int selectedIndex = -1;
-
+  Map<String, String>? dateTimeInfo;
+  String? month;
+  final List<String> week = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  final List<String> date = ["27", "28", "29", "30", "31", "01", "02"];
   HomePage({super.key});
 
   @override
@@ -21,6 +21,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? s;
+  String? currentDay;
+  int selectedIndex = 0;
+  Map<String, dynamic>? routine;
+
+  Future<void> loadData() async {
+    final data = await TestingData.loadRoutine();
+    setState(() {
+      routine = data;
+      print(routine);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    widget.dateTimeInfo = HelperFunctions().getDateInfo();
+    currentDay = widget.dateTimeInfo!['day'];
+    // selectedIndex = widget.week.indexOf(currentDay!);
+    // if (selectedIndex == -1) {
+    //   selectedIndex = 0; // fallback
+    // }
+
+    loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,53 +62,36 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-
-          // Cancel(
-          //   onTab: () {
-          //     print("Cancel");
-          //   },
-          //   animation: false,
-          // ).cancelButton(),
-
           //customCard
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //NOTE:For debugging purpose
-              if (widget.s != null)
-                Text(
-                  widget.s!,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 65),
               Center(
                 child: SizedBox(
                   height: 126,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: widget.week.length,
+                    itemCount: 7,
                     itemBuilder: (context, index) {
+                      final dates7 = HelperFunctions().getDateInfo(
+                        offsetDays: index,
+                      );
+                      String week7 = dates7["day"]!;
+                      String date7 = dates7["date"]!;
+                      String month7 = dates7["month"]!;
                       return DateWeakChip(
-                        selected: widget.selectedIndex == index,
+                        selected: selectedIndex == index,
                         sigmaX: 0,
                         sigmaY: 0,
-                        day: widget.week[index],
-                        date: widget.date[index],
-                        month: widget.month,
+                        day: week7,
+                        date: date7,
+                        month: month7,
                         onTab: () {
                           setState(() {
-                            widget.selectedIndex = index;
+                            selectedIndex = index;
                             print(widget.date[index]);
-                            widget.s =
-                                widget.date[index] +
-                                " " +
-                                widget.week[index] +
-                                " " +
-                                widget.month;
+                            currentDay = widget.week[index];
                           });
                         },
                       ).myCard();
@@ -89,31 +99,34 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              RoutineCard(
-                startTime: "11:50",
-                endTime: "01:10",
-                courseTitle: "Object Oriented Programming",
-                courseCode: "CSE-2111",
-                section: "65_B",
-                teacherName: "AHM",
-                roomNumber: "226",
-                onTab: () {
-                  print("Hehe");
-                },
-              ).card(),
 
-              RoutineCard(
-                startTime: "11:50",
-                endTime: "01:10",
-                courseTitle: "Object Oriented Programming",
-                courseCode: "CSE-2111",
-                section: "65_B",
-                teacherName: "AHM",
-                roomNumber: "226",
-                onTab: () {
-                  print("Hehe");
-                },
-              ).card(),
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: routine![currentDay].length,
+
+                  //BUG:Wednesday, Thursday and Friday class off values must be handle
+                  itemBuilder: (context, index) {
+                    final course = routine![currentDay][index];
+                    final bool lol = routine!.containsKey("Class");
+                    return lol
+                        ? Text("Holiday")
+                        : RoutineCard(
+                            startTime: course["start_time"],
+                            endTime: course["end_time"],
+                            courseTitle: course["courseTitle"],
+                            courseCode: course["courseCode"],
+                            section: course["section"],
+                            teacherName: course["teacher"],
+                            roomNumber: course["room"],
+                            onTab: () {
+                              print("tabbed");
+                              print(course["teacher"]);
+                            },
+                          ).card();
+                  },
+                ),
+              ),
             ],
           ),
         ],
