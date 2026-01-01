@@ -1,5 +1,6 @@
 import 'package:cityu_student_protal/custom_components/cancel_button.dart';
 import 'package:cityu_student_protal/custom_components/date_weak_chip.dart';
+import 'package:cityu_student_protal/custom_components/newDateChoice.dart';
 import 'package:cityu_student_protal/custom_components/routine_card.dart';
 import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
 import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
@@ -70,61 +71,65 @@ class _HomePageState extends State<HomePage> {
               Center(
                 child: SizedBox(
                   height: 126,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 7,
-                    itemBuilder: (context, index) {
-                      final dates7 = HelperFunctions().getDateInfo(
-                        offsetDays: index,
-                      );
-                      String week7 = dates7["day"]!;
-                      String date7 = dates7["date"]!;
-                      String month7 = dates7["month"]!;
-                      return DateWeakChip(
-                        selected: selectedIndex == index,
-                        sigmaX: 0,
-                        sigmaY: 0,
-                        day: week7,
-                        date: date7,
-                        month: month7,
-                        onTab: () {
-                          setState(() {
-                            selectedIndex = index;
-                            print(widget.date[index]);
-                            currentDay = widget.week[index];
-                          });
-                        },
-                      ).myCard();
-                    },
+                  child: ScrollConfiguration(
+                    behavior: ScrollBehavior().copyWith(overscroll: false),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, index) {
+                        final dates7 = HelperFunctions().getDateInfo(
+                          offsetDays: index,
+                        );
+                        String week7 = dates7["day"]!;
+                        String date7 = dates7["date"]!;
+                        String month7 = dates7["month"]!;
+                        return NDateWeakChip(
+                          selected: selectedIndex == index,
+                          day: week7,
+                          date: date7,
+                          month: month7,
+                          onTab: () {
+                            setState(() {
+                              selectedIndex = index;
+                              print(widget.date[index]);
+                              currentDay = widget.week[index];
+                            });
+                          },
+                        ).myCard();
+                      },
+                    ),
                   ),
                 ),
               ),
 
               Expanded(
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: routine![currentDay].length,
+                child: ScrollConfiguration(
+                  behavior: ScrollBehavior().copyWith(overscroll: false),
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: routine![currentDay].length,
 
-                  //BUG:Wednesday, Thursday and Friday class off values must be handle
-                  itemBuilder: (context, index) {
-                    final course = routine![currentDay][index];
-                    final bool lol = routine!.containsKey("Class");
-                    return lol
-                        ? Text("Holiday")
-                        : RoutineCard(
-                            startTime: course["start_time"],
-                            endTime: course["end_time"],
-                            courseTitle: course["courseTitle"],
-                            courseCode: course["courseCode"],
-                            section: course["section"],
-                            teacherName: course["teacher"],
-                            roomNumber: course["room"],
-                            onTab: () {
-                              print("tabbed");
-                              print(course["teacher"]);
-                            },
-                          ).card();
-                  },
+                    //BUG:Wednesday, Thursday and Friday class off values must be handle
+                    itemBuilder: (context, index) {
+                      final course = routine![currentDay][index];
+                      final bool lol = routine!.containsKey("Class");
+                      return lol
+                          ? Text("Holiday")
+                          : RoutineCard(
+                              startTime: course["start_time"],
+                              endTime: course["end_time"],
+                              courseTitle: course["courseTitle"],
+                              courseCode: course["courseCode"],
+                              section: course["section"],
+                              teacherName: course["teacher"],
+                              roomNumber: course["room"],
+                              onTab: () {
+                                print("tabbed");
+                                print(course["teacher"]);
+                              },
+                            ).card();
+                    },
+                  ),
                 ),
               ),
             ],

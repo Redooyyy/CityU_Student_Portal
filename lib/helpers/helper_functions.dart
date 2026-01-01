@@ -10,7 +10,7 @@ class HelperFunctions {
   ];
 
   static const List<String> months = [
-    'January',
+    'Jan',
     'February',
     'March',
     'April',

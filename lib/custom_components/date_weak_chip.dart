@@ -26,8 +26,8 @@ class DateWeakChip {
       child: GestureDetector(
         onTap: onTab,
         child: GlassContainer2(
-          sigmaY: sigmaY,
-          sigmaX: sigmaX,
+          // sigmaY: sigmaY,
+          // sigmaX: sigmaX,
           width: 90,
           height: 110,
           borderRadius: 20,
