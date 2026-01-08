@@ -1,14 +1,12 @@
-import 'package:chip_list/chip_list.dart';
-import 'package:cityu_student_protal/custom_widget/dropdown.dart';
-import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
-import 'package:cityu_student_protal/custom_widget/glassy_button_loading.dart';
-import 'package:cityu_student_protal/custom_widget/glassy_container.dart';
-import 'package:cityu_student_protal/pages/home_page.dart';
-import 'package:cool_dropdown/cool_dropdown.dart';
-import 'package:cool_dropdown/models/cool_dropdown_item.dart';
-import 'package:flutter/material.dart';
-
 //TODO:Have to clean and split in files
+
+import 'package:chip_list/chip_list.dart';
+import 'package:cityu_student_protal/core/custom_widget/glassy_button_loading.dart';
+import 'package:cityu_student_protal/core/custom_widget/glassy_container.dart';
+import 'package:cityu_student_protal/features/auth/presentation/widget/dropdown.dart';
+import 'package:cityu_student_protal/pages/home_page.dart';
+import 'package:cool_dropdown/controllers/dropdown_controller.dart';
+import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

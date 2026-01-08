@@ -1,5 +1,5 @@
+import 'package:cityu_student_protal/features/auth/presentation/pages/login_page.dart';
 import 'package:cityu_student_protal/pages/home_page.dart';
-import 'package:cityu_student_protal/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

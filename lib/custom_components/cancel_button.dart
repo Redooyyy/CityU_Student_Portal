@@ -1,4 +1,4 @@
-import 'package:cityu_student_protal/custom_widget/glassy_button_loading.dart';
+import 'package:cityu_student_protal/core/custom_widget/glassy_button_loading.dart';
 import 'package:flutter/material.dart';
 
 class Cancel {

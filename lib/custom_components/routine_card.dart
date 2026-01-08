@@ -1,4 +1,4 @@
-import 'package:cityu_student_protal/custom_widget/glass_container2.dart';
+import 'package:cityu_student_protal/core/custom_widget/glass_container2.dart';
 import 'package:flutter/material.dart';
 
 class RoutineCard {
