@@ -69,6 +69,7 @@ flutter:
     #  - images/a_dot_burr.jpeg
     - assets/images/backgroundTest.jpeg
     - assets/images/university.png
+    - assets/images/background.gif
     - assets/images/homeBackground.jpg
     - assets/data/dummy.json
   #   - images/a_dot_ham.jpeg

@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 // image: NetworkImage(
                 //   'https://media.licdn.com/dms/image/v2/C511BAQHE9ado2KPp6A/company-background_10000/company-background_10000/0/1584245134523/city_university_bd_cover?e=2147483647&v=beta&t=aXKXdFMzpOQuYWb-t1YzBNWcQkl-saKLh64B_ZLfyOU',
                 // ),
-                image: AssetImage("assets/images/backgroundTest.jpeg"),
+                image: AssetImage("assets/images/background.gif"),
                 fit: BoxFit.cover,
               ),
             ),
