@@ -1,8 +1,15 @@
+import 'package:cityu_student_protal/core/secretes/supabase_secrete.dart';
 import 'package:cityu_student_protal/features/auth/presentation/pages/login_page.dart';
 import 'package:cityu_student_protal/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: SupabaseSecrete.supabaseUrl,
+    anonKey: SupabaseSecrete.supabaseAnonKey,
+  );
   runApp(const MyApp());
 }
 
