@@ -25,6 +25,7 @@ abstract interface class AuthRemoteDataSource {
     required String batch,
     required Department department,
     required Shift shift,
+    required String email,
     required String tempPassword,
   });
 
