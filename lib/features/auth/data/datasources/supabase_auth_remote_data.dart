@@ -2,7 +2,7 @@ import 'package:cityu_student_protal/core/enums/department.dart';
 import 'package:cityu_student_protal/core/enums/gender.dart';
 import 'package:cityu_student_protal/core/enums/shift.dart';
 import 'package:cityu_student_protal/core/error/exception.dart';
-import 'package:cityu_student_protal/features/auth/data/auth_remote_data_source.dart';
+import 'package:cityu_student_protal/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthRemoteData implements AuthRemoteDataSource {
