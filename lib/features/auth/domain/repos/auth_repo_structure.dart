@@ -5,7 +5,7 @@ import 'package:cityu_student_protal/core/enums/gender.dart';
 import 'package:fpdart/fpdart.dart';
 
 //TODO:Now on success passed a String must pass an object but we'll do it later :)
-abstract interface class AuthRepoStruct {
+abstract interface class AuthRepoStructure {
   //login via emailPass
   Future<Either<Failure, String>> loginViaEmailAndPassword({
     required String email,
