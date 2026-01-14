@@ -5,7 +5,7 @@ import 'package:cityu_student_protal/core/error/exception.dart';
 import 'package:cityu_student_protal/core/error/failure.dart';
 import 'package:cityu_student_protal/features/auth/data/datasources/supabase_auth_remote_data.dart';
 import 'package:cityu_student_protal/features/auth/domain/repos/auth_repo_structure.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 
 class AuthRepoImpliment implements AuthRepoStructure {
   final SupabaseAuthRemoteData supabaseAuthRemoteData;
